@@ -1,0 +1,42 @@
+# Ambientes e ferramentas locais
+.venv/
+.tools/
+
+# Temporários e caches
+tmp/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Artefatos de empacotamento
+*.egg-info/
+build/
+dist/
+
+# Todas as saídas de execuções: dados, pesos, métricas, históricos,
+# relatórios automáticos, gráficos e exemplos de inferência.
+/outputs/
+/data/generated/
+/runs/
+/logs/
+/checkpoints/
+
+# Dados binários e modelos, mesmo quando salvos fora das pastas acima
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.log
+
+# Fontes, configurações de entrada (configs/), documentos (docs/),
+# notebooks (.ipynb) e materiais originais de consulta continuam versionáveis.
+# Não ignorar globalmente .json, .csv, .md, .ipynb, .pdf ou .png:
+# as saídas desses tipos já são excluídas pelas pastas de execução acima.
