@@ -6,7 +6,37 @@ O planejamento é o arquivo [Planajamento de projeto.pdf](material-consulta/Plan
 
 ## Instalação
 
-Python 3.10 ou superior. No PowerShell, dentro da pasta do projeto:
+Python 3.10 ou superior. O ambiente Conda é a opção recomendada porque reúne as
+dependências do projeto, dos testes, da leitura de PDFs e do notebook. No PowerShell,
+dentro da pasta do projeto:
+
+```powershell
+conda env create --file environment.yml
+conda activate g2metric-mm845
+python -m pytest -q
+```
+
+O arquivo `environment.yml` configura Python 3.12 e PyTorch para CPU, coerente com
+`configs/full.json`. Ele também instala o próprio pacote `g2metric` em modo editável:
+alterações feitas nos arquivos `.py` passam a valer sem reinstalação. Para atualizar
+um ambiente já criado depois de mudanças no arquivo:
+
+```powershell
+conda env update --name g2metric-mm845 --file environment.yml --prune
+conda activate g2metric-mm845
+```
+
+Para conferir o ambiente ativo ou removê-lo posteriormente:
+
+```powershell
+conda env list
+conda deactivate
+conda env remove --name g2metric-mm845
+```
+
+Se quiser usar CUDA, instale a distribuição PyTorch compatível com sua GPU e remova
+`cpuonly` de uma cópia do arquivo antes de criar o ambiente. A opção abaixo usa
+`venv` e continua disponível para quem não utiliza Conda:
 
 ```powershell
 python -m venv .venv
@@ -22,7 +52,7 @@ Para instalar especificamente a distribuição PyTorch para CPU:
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-`requirements-lock.txt` registra as versões exatas usadas localmente. Inclui pacotes de leitura de PDF e o build CPU de PyTorch. Para reproduzir esse ambiente, use o índice CPU com `--extra-index-url https://download.pytorch.org/whl/cpu`; o arquivo geral de requisitos é preferível em outras plataformas.
+`requirements-lock.txt` registra as versões exatas usadas localmente. Inclui pacotes de leitura de PDF e o build CPU de PyTorch. Para reproduzir esse ambiente com `pip`, use o índice CPU com `--extra-index-url https://download.pytorch.org/whl/cpu`; o arquivo geral de requisitos é preferível em outras plataformas. O `environment.yml` declara faixas compatíveis em vez de reproduzir byte a byte o ambiente local.
 
 ## Executar
 

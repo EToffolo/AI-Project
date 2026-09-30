@@ -1,0 +1,23 @@
+name: g2metric-mm845
+
+channels:
+  - pytorch
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - pip>=24
+  - setuptools>=68
+  - numpy>=1.26
+  - matplotlib>=3.8
+  - pytorch>=2.2
+  - cpuonly
+  - pytest>=8
+  - pypdf>=5
+  - pymupdf>=1.24
+  - ipykernel>=6
+  - nbformat>=5
+  - nbclient>=0.10
+  - nbconvert>=7
+  - pip:
+      - -e .
