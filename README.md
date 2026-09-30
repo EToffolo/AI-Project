@@ -1,6 +1,6 @@
 # AI-Project — Métrica induzida por uma estrutura G₂
 
-Projeto da disciplina **MM845 — uso de IA na pesquisa matemática**. Compara regressão ridge, uma MLP em PyTorch e a mesma MLP com augmentação por rotações para aproximar a aplicação `φ ↦ gφ` em um espaço vetorial orientado de dimensão 7.
+Projeto da disciplina **MM845 — uso de IA na pesquisa matemática**. Compara regressão ridge, uma MLP em PyTorch e a mesma MLP com augmentação por rotações para aproximar a aplicação `φ ↦ g_φ` em um espaço vetorial orientado de dimensão 7.
 
 O planejamento é o arquivo [Planajamento de projeto.pdf](material-consulta/Planajamento%20de%20projeto.pdf). A rede recebe **35 coeficientes de uma 3-forma positiva** e retorna uma matriz simétrica 7×7 positiva definida. Trata-se de um benchmark algébrico com fórmula exata conhecida.
 
