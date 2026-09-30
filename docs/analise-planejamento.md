@@ -59,8 +59,8 @@ Para operacionalizar “sem perda material de precisão”, adotou-se tolerânci
 - Rotações preservam o intervalo de valores singulares. Transformações GL⁺ e escala podem sair do suporte ID; os diagnósticos devem ser interpretados separadamente.
 - O cálculo exato é o padrão de referência. O projeto não demonstra vantagem de velocidade ou substituição da fórmula conhecida.
 
-## Fontes e limites do curso
+## Escopo adotado
 
-[Análise dos slides](analise-slides.md) e [análise dos tutoriais](analise-tutoriais.md) registram cada arquivo. A implementação usa Python, NumPy, PyTorch, regressão regularizada, MLP, Adam, augmentação e protocolo experimental tratados nesses materiais. O uso de Cholesky, álgebra exterior e geometria G₂ vem explicitamente do planejamento. CNN, atenção, GNN, PINN, modelos generativos e RL não são necessários à tarefa pontual.
+A implementação usa Python, NumPy, PyTorch, regressão regularizada, MLP, Adam, augmentação e um protocolo experimental reproduzível. O uso de Cholesky, álgebra exterior e geometria G₂ segue o planejamento. Arquiteturas adicionais não são necessárias à tarefa pontual definida no documento.
 
 Referências do planejamento: [Karigiannis](https://arxiv.org/abs/1909.09717), [Grigorian](https://arxiv.org/abs/1108.2465), [Chen, Dobriban e Lee](https://jmlr.org/papers/v21/20-163.html). A documentação oficial de [reprodutibilidade do PyTorch](https://docs.pytorch.org/docs/stable/notes/randomness.html) fundamenta o registro de versões e as limitações entre plataformas.

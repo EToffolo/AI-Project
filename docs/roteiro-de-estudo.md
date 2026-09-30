@@ -16,8 +16,8 @@ Há duas respostas de naturezas diferentes:
 Comparam-se ridge, MLP e MLP com rotações durante o treinamento. A pergunta principal é se oferecer exemplos transformados melhora o respeito à geometria sem prejudicar a precisão. A mesma arquitetura de rede é usada nas duas MLPs. Não se está descobrindo uma fórmula desconhecida, resolvendo uma EDP ou construindo uma estrutura global sem torção.
 
 ```text
-Planejamento + materiais da disciplina
-                  ↓ orientam
+            Planejamento
+                  ↓ orienta
              configs/full.json
                   ↓ controla
 geometry.py → data.py → models.py + training.py → evaluation.py
@@ -47,17 +47,15 @@ Identifique a entrada φ, a saída g, a referência exata e os três métodos co
 
 **Pode avançar quando:** conseguir distinguir o interesse experimental em aprendizado geométrico da capacidade de calcular g exatamente.
 
-## Sessão 2 — Reconhecer as ferramentas da disciplina
+## Sessão 2 — Reconhecer as escolhas do experimento
 
 **Objetivo:** compreender por que foram escolhidos esses métodos.
 
-Leia o mapa de [análise dos slides](analise-slides.md) e de [análise dos tutoriais](analise-tutoriais.md). Para uma primeira revisão da disciplina, priorize os materiais **01 → 02 → 03 → 04 → 10**: ambiente, protocolo de aprendizagem, regressão, redes e simetrias. Os demais materiais dão contexto e critérios para escolher métodos; o projeto não exige aplicar tudo o que foi ensinado.
-
-Em seguida, abra [models.py](../g2metric/models.py). Nesta leitura, procure apenas os nomes `Standardizer`, `RidgeRegressor`, `MetricMLP` e `relative_frobenius_loss` e os comentários que os descrevem.
+Releia as decisões descritas no [planejamento comentado](analise-planejamento.md) e abra [models.py](../g2metric/models.py). Nesta leitura, procure apenas os nomes `Standardizer`, `RidgeRegressor`, `MetricMLP` e `relative_frobenius_loss` e os comentários que os descrevem.
 
 Pense na ridge como uma aplicação afim regularizada das coordenadas da entrada para as entradas independentes da matriz. Pense na MLP como uma família não linear de funções parametrizadas. PyTorch calcula as derivadas da perda em relação aos parâmetros; Adam usa essas derivadas para atualizá-los.
 
-**Atividade:** explique por que ter imagens de slides na pasta de consulta não torna o problema uma tarefa de visão computacional e por que um mapa algébrico com respostas conhecidas não precisa de aprendizado por reforço.
+**Atividade:** explique por que um mapa algébrico com respostas conhecidas pode ser tratado por aprendizagem supervisionada e por que a ridge é uma referência útil para avaliar a MLP.
 
 **Pode avançar quando:** souber explicar o papel de NumPy, PyTorch e Matplotlib e por que ridge é um comparador útil.
 
@@ -165,15 +163,13 @@ Os testes procuram erros de implementação: sinais e convenções, divisão dos
 
 | Pasta | Papel | Prioridade de leitura |
 | --- | --- | --- |
-| [material-consulta](../material-consulta) | Fontes originais do curso e planejamento. Não contém dados usados como entradas da rede. | Planejamento primeiro; materiais conforme a sessão. |
-| [material-consulta/slides](../material-consulta/slides) | 13 aulas PDF e pôster do curso em PDF/PNG. | Aulas 01–04 e 10 são centrais. |
-| [material-consulta/tutoriais](../material-consulta/tutoriais) | 13 READMEs descritivos dos tutoriais. Os notebooks mencionados neles não foram copiados para esta pasta. | Mesma ordem das aulas centrais. |
+| [material-consulta](../material-consulta) | PDF original do planejamento. Não contém dados usados como entradas da rede. | Consultar junto ao planejamento comentado. |
 | [notebooks](../notebooks) | Exposição integrada e didática do projeto. | Começar por aqui. |
 | [scripts](../scripts) | Ferramentas auxiliares de documentação, como a montagem do notebook a partir dos resultados registrados. | Depois de compreender o relato; não participa do treinamento. |
 | [configs](../configs) | Valores que controlam geração, treinamento e avaliação. | Antes de executar experimentos. |
 | [g2metric](../g2metric) | Código do projeto; é o pacote Python usado por `python -m g2metric`. | Ler por função científica, na ordem das sessões. |
 | [tests](../tests) | Verificações automatizadas com casos conhecidos e pequenos. | Após entender o fluxo. |
-| [docs](../docs) | Análises do material, decisões e interpretação dos resultados. | Acompanha todo o roteiro. |
+| [docs](../docs) | Decisões, interpretação dos resultados, registro de assistência e roteiro. | Acompanha todo o roteiro. |
 | [outputs/full](../outputs/full) | Execução científica completa, com 27 ajustes. | Fonte dos números apresentados. |
 | [outputs/smoke](../outputs/smoke) | Execução reduzida para verificar funcionamento; 600 pares ID, 90 OOD, uma semente e até 4 épocas. | Para conhecer arquivos sem confundir com resultados completos. |
 | [outputs/example](../outputs/example) | `phi0.npy` e `metric.npy`, exemplos binários de entrada e saída de inferência. A resposta exata de φ₀ é I; uma previsão aprendida pode diferir. | Demonstração opcional. |
@@ -215,8 +211,6 @@ Arquivos como `.pyc`, pastas de cache e saídas repetidas seguem padrões; não 
 | [notebooks/relatorio-projeto-g2.ipynb](../notebooks/relatorio-projeto-g2.ipynb) | Relato auto-contido com conceitos, parâmetros, gráficos, resultados e pequenos exemplos. |
 | [scripts/build_notebook.py](../scripts/build_notebook.py) | Lê resultados, configuração, metadados e figuras de `outputs/full/`; incorpora-os ao notebook, valida seu formato e executa os exemplos em uma pasta temporária isolada. Não treina nem importa `g2metric` nas células. |
 | [docs/analise-planejamento.md](analise-planejamento.md) | Traduz cada requisito do PDF em decisões concretas e distingue escolhas adicionais. |
-| [docs/analise-slides.md](analise-slides.md) | Registra o conteúdo de cada aula/pôster e sua relação com o projeto. |
-| [docs/analise-tutoriais.md](analise-tutoriais.md) | Registra o conteúdo de cada README de tutorial e o que se aplica aqui. |
 | [docs/resultados.md](resultados.md) | Interpretação científica da execução completa e suas limitações. |
 | [docs/uso-ia.md](uso-ia.md) | Descreve a assistência de IA e distingue testes computacionais de revisão científica humana. |
 | [docs/roteiro-de-estudo.md](roteiro-de-estudo.md) | Este roteiro: ordem de aprendizagem e mapa dos arquivos. |
@@ -242,28 +236,6 @@ Arquivos como `.pyc`, pastas de cache e saídas repetidas seguem padrões; não 
 | `gl_log_bound`, `scale_factors` | Limite 0,2 para mudanças de base diagnósticas; fatores de escala 0,25, 0,5, 2 e 4. |
 | `accuracy_tolerance_relative` | 0,05: admite até 5% de aumento relativo na mediana do erro para o critério comparativo. Não significa exigir erro absoluto inferior a 5%. |
 | `threads`, `device` | Duas threads e CPU; controlam a execução computacional. |
-
-### Materiais originais, sem arquivos “misteriosos”
-
-Cada linha liga uma aula e seu tutorial correspondente. Para conteúdo detalhado, use as análises em `docs/`; aqui a finalidade é localizar e priorizar.
-
-| Aula / tutorial | Assunto e posição no estudo |
-| --- | --- |
-| [lecture_01.pdf](../material-consulta/slides/lecture_01.pdf) / [README-01.md](../material-consulta/tutoriais/README-01.md) | Ferramentas computacionais, ambiente e reprodução; sessão 2. |
-| [lecture_02.pdf](../material-consulta/slides/lecture_02.pdf) / [README-02.md](../material-consulta/tutoriais/README-02.md) | Fundamentos, dados, amostragem e generalização; sessões 2 e 4. |
-| [lecture_03.pdf](../material-consulta/slides/lecture_03.pdf) / [README-03.md](../material-consulta/tutoriais/README-03.md) | Regressão e regularização; sessão 5. |
-| [lecture_04.pdf](../material-consulta/slides/lecture_04.pdf) / [README-04.md](../material-consulta/tutoriais/README-04.md) | MLP e treinamento; sessão 5. |
-| [lecture_05.pdf](../material-consulta/slides/lecture_05.pdf) / [README-05.md](../material-consulta/tutoriais/README-05.md) | CNNs e simetrias de imagens; leitura contextual. |
-| [lecture_06.pdf](../material-consulta/slides/lecture_06.pdf) / [README-06.md](../material-consulta/tutoriais/README-06.md) | Atenção e transformers; leitura contextual. |
-| [lecture_07.pdf](../material-consulta/slides/lecture_07.pdf) / [README-07.md](../material-consulta/tutoriais/README-07.md) | Agrupamentos; exploração opcional, fora do núcleo implementado. |
-| [lecture_08.pdf](../material-consulta/slides/lecture_08.pdf) / [README-08.md](../material-consulta/tutoriais/README-08.md) | Redução de dimensão e interpretação de visualizações; contextual. |
-| [lecture_09.pdf](../material-consulta/slides/lecture_09.pdf) / [README-09.md](../material-consulta/tutoriais/README-09.md) | Aprendizado por reforço; contextual. |
-| [lecture_10.pdf](../material-consulta/slides/lecture_10.pdf) / [README-10.md](../material-consulta/tutoriais/README-10.md) | Simetrias, invariância, equivariância e augmentação; sessões 5 e 6. |
-| [lecture_11.pdf](../material-consulta/slides/lecture_11.pdf) / [README-11.md](../material-consulta/tutoriais/README-11.md) | Variedades e difusão; contextual. |
-| [lecture_12.pdf](../material-consulta/slides/lecture_12.pdf) / [README-12.md](../material-consulta/tutoriais/README-12.md) | PINNs, restrições e verificação; úteis para discutir o princípio de impor positividade. |
-| [lecture_13.pdf](../material-consulta/slides/lecture_13.pdf) / [README-13.md](../material-consulta/tutoriais/README-13.md) | PINNs, operadores e entrega científica; útil para a síntese da sessão 8. |
-| [AI_course_poster.pdf](../material-consulta/slides/AI_course_poster.pdf) / [AI_course_poster.png](../material-consulta/slides/AI_course_poster.png) | Duas versões do pôster geral do curso; não são dois experimentos. |
-| [Planajamento de projeto.pdf](../material-consulta/Planajamento%20de%20projeto.pdf) | Requisitos específicos do projeto; sessão 1 e conferência final. |
 
 ## Decodificar os arquivos de uma execução
 

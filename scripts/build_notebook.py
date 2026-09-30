@@ -650,10 +650,10 @@ def main():
 
     | Pasta/arquivo | Papel |
     | --- | --- |
-    | `material-consulta/` | PDFs e tutoriais originais, preservados |
+    | `material-consulta/` | PDF original do planejamento |
     | `configs/` | Parâmetros `smoke` e `full`; não são pesos aprendidos |
     | `tests/` | Verificações matemáticas e de software |
-    | `docs/` | Análises dos materiais, decisões, resultados, declaração de IA e roteiro |
+    | `docs/` | Decisões, resultados, declaração de IA e roteiro |
     | `outputs/full/` | Experimento científico completo |
     | `outputs/smoke/` | Verificação rápida do funcionamento |
     | `outputs/example/` | Forma padrão e exemplo de inferência |
@@ -705,11 +705,9 @@ def main():
     4. A extrapolação e a homogeneidade permanecem limitações importantes.
     5. Baixo defeito geométrico não substitui precisão: o ridge quase constante ilustra isso.
 
-    Os materiais de MM845 sustentam Python/NumPy/PyTorch, ridge, MLP, Adam,
-    protocolo de avaliação e aprendizagem com simetrias. A geometria G₂ e a
-    saída por fator triangular vêm do planejamento. CNNs, atenção, GNNs, RL,
-    modelos generativos e PINNs também aparecem no curso, mas não são necessários
-    ao problema algébrico pontual especificado.
+    A implementação combina Python/NumPy/PyTorch, ridge, MLP, Adam, protocolo de
+    avaliação e aprendizagem com simetrias. A geometria G₂ e a saída por fator
+    triangular seguem o planejamento do projeto.
 
     Possíveis estudos posteriores incluem maior orçamento de treinamento, outras
     larguras de rede e formas de incorporar a lei de escala. Eles seriam **novos
@@ -766,7 +764,6 @@ def main():
     ### Fontes usadas
 
     - **Planejamento do projeto**, Eduardo Toffolo, *Learning the Metric Induced by a G₂-Structure: Generalisation and Equivariance*, 3 páginas. No repositório: `material-consulta/Planajamento de projeto.pdf` (grafia original preservada).
-    - **MM845**, slides `lecture_01.pdf` a `lecture_13.pdf`, cartaz PDF/PNG e tutoriais `README-01.md` a `README-13.md`, obtidos do [repositório do curso](https://github.com/TomasSilva/MM845). Leituras por documento registradas em `docs/analise-slides.md` e `docs/analise-tutoriais.md`.
     - S. Karigiannis, [Introduction to G₂ geometry](https://arxiv.org/abs/1909.09717).
     - S. Grigorian, [Deformations of G₂-structures with torsion](https://arxiv.org/abs/1108.2465), seção 2, para as convenções e a fórmula da métrica.
     - S. Chen, E. Dobriban e J. H. Lee, [A Group-Theoretic Framework for Data Augmentation](https://jmlr.org/papers/v21/20-163.html).

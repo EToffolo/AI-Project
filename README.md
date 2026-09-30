@@ -135,8 +135,6 @@ Precisão, equivariância e escala são medidas separadamente: uma saída quase 
 
 - [Notebook explicativo do projeto](notebooks/relatorio-projeto-g2.ipynb): texto, fórmulas, parâmetros, resultados e cinco figuras incorporadas; pode ser lido sem executar as células ou acessar outros arquivos.
 - [Roteiro de estudo em oito sessões](docs/roteiro-de-estudo.md): ordem de leitura, função de cada pasta/arquivo, atividades e perguntas com respostas.
-- [Análise de todos os slides e do cartaz](docs/analise-slides.md)
-- [Análise dos 13 tutoriais](docs/analise-tutoriais.md)
 - [Planejamento, decisões e rastreabilidade dos requisitos](docs/analise-planejamento.md)
 - [Registro de assistência de IA](docs/uso-ia.md)
 - `g2metric/geometry.py`, `data.py`: álgebra exterior e dados sintéticos;

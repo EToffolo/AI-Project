@@ -1,8 +1,8 @@
 # Registro de assistência de IA
 
-Este projeto foi implementado com assistência do Codex, a pedido do autor, a partir dos arquivos locais da disciplina MM845 e do planejamento fornecido. A assistência incluiu leitura dos 13 slides, do cartaz PDF/PNG, dos 13 READMEs e das três páginas do planejamento; implementação; testes; documentação; execução dos experimentos e geração dos relatórios.
+Este projeto foi implementado com assistência do Codex, a pedido do autor, a partir do planejamento fornecido. A assistência incluiu leitura das três páginas do planejamento, implementação, testes, documentação, execução dos experimentos e geração dos relatórios.
 
-O trabalho foi dividido entre agentes para análise dos tutoriais, análise dos slides, implementação matemática, modelos e revisão de testes. Essa divisão é uma revisão de software assistida por IA, não uma revisão científica independente por pesquisadores humanos.
+O trabalho foi dividido entre agentes para implementação matemática, modelos, documentação e revisão de testes. Essa divisão é uma revisão de software assistida por IA, não uma revisão científica independente por pesquisadores humanos.
 
 As identidades matemáticas foram verificadas computacionalmente por rotas distintas: rótulos AᵀA versus cálculo exterior a partir apenas de φ; casos identidade/diagonal; naturalidade por matrizes não ortogonais; composição de pullbacks; homogeneidade; e compatibilidade NumPy/PyTorch. Esses testes não substituem demonstrações matemáticas. As convenções foram comparadas com a referência original de Grigorian.
 
