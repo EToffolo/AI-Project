@@ -705,6 +705,53 @@ def main():
     4. A extrapolação e a homogeneidade permanecem limitações importantes.
     5. Baixo defeito geométrico não substitui precisão: o ridge quase constante ilustra isso.
 
+    ### Por que o erro ainda é grande?
+
+    No maior treino, as medianas ID são 36,58% para ridge, 25,81% para MLP e
+    24,99% para MLP com rotações; em OOD, são 62,29%, 43,57% e 42,79%.
+    Trata-se do erro relativo de Frobenius da matriz inteira, não de uma taxa de
+    classificação ou da porcentagem de entradas incorretas. Como os rótulos são
+    exatos, esse erro vem da aproximação, da otimização e da generalização.
+
+    O experimento não contém ablações suficientes para atribuir o erro a uma única
+    causa. As explicações abaixo são hipóteses apoiadas pelo comportamento observado:
+
+    - o mapa é fortemente não linear: `B(φ)` é cúbico em `φ` e a métrica inclui
+      uma normalização por determinante; por isso uma regressão afim tem capacidade
+      limitada para representá-lo;
+    - a MLP 35–128–128–28 é uma aproximação genérica, sem homogeneidade ou
+      equivariância impostas pela arquitetura;
+    - treino e validação permanecem próximos, enquanto os melhores checkpoints das
+      redes aumentadas aparecem nas épocas 96, 98 e 97, perto do limite de 100;
+      isso é compatível com subajuste ou orçamento insuficiente, embora não o prove;
+    - 21.000 exemplos ainda cobrem de modo esparso um domínio contínuo de dimensão
+      35, e o teste OOD amplia de 0,35 para 0,7 o limite dos logaritmos dos valores
+      singulares;
+    - rotações não ensinam automaticamente a lei `g(tφ)=t^(2/3)g(φ)`. Além disso,
+      a distribuição fonte já é rotacionalmente invariante, de modo que a
+      augmentação melhora a exposição finita, mas não amplia o suporte populacional.
+
+    ### Possibilidades de melhoria
+
+    Se a prioridade for precisão numérica, a fórmula `metric_exact` continua sendo
+    a solução apropriada e alcança erro próximo da precisão de ponto flutuante. Para
+    estudar uma aproximação aprendida, próximos experimentos poderiam:
+
+    1. verificar primeiro se uma rede consegue sobreajustar deliberadamente 128 ou
+       256 exemplos; isso separa limitações de otimização/capacidade de problemas de
+       generalização;
+    2. aumentar largura, profundidade e número máximo de épocas, usar um scheduler de
+       learning rate e escolher todas essas opções somente pela validação;
+    3. impor exatamente a homogeneidade, normalizando a escala da entrada e
+       restaurando o fator de grau `2/3` na saída;
+    4. testar uma arquitetura SO(7)-equivariante ou atributos tensoriais inspirados
+       nas contrações que formam `B(φ)`;
+    5. usar mais dados e, para melhorar a região atualmente OOD, ampliar a faixa de
+       treino e reservar uma nova faixa externa para um teste realmente independente.
+
+    Essas propostas exigem novas execuções. Resultados de teste já observados não
+    devem ser usados para escolher retrospectivamente a configuração vencedora.
+
     A implementação combina Python/NumPy/PyTorch, ridge, MLP, Adam, protocolo de
     avaliação e aprendizagem com simetrias. A geometria G₂ e a saída por fator
     triangular seguem o planejamento do projeto.
