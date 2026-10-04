@@ -2,7 +2,7 @@
 
 O objetivo deste roteiro é conseguir explicar **qual pergunta o projeto investiga, como os dados atravessam o programa e o que os resultados permitem concluir**, sem precisar acompanhar cada operação de Python. O caminho sugerido tem oito sessões de 30–60 minutos; os comandos são opcionais.
 
-Comece pelo [notebook do projeto](../notebooks/relatorio-projeto-g2.ipynb). Ele reúne a exposição matemática, o protocolo, os parâmetros, os resultados e os gráficos. Texto, figuras, resultados e exemplos didáticos estão incorporados ao arquivo: sua leitura não exige os dados nem os modelos salvos nas demais pastas. O presente roteiro é o mapa para, depois, relacionar essa exposição aos arquivos reais do projeto.
+Comece pelo [notebook do projeto](relatorio-projeto-g2.ipynb). Ele reúne a exposição matemática, o protocolo, os parâmetros, os resultados e os gráficos. Texto, figuras, resultados e exemplos didáticos estão incorporados ao arquivo: sua leitura não exige os dados nem os modelos salvos nas demais pastas. O presente roteiro é o mapa para, depois, relacionar essa exposição aos arquivos reais do projeto.
 
 ## A ideia em uma página
 
@@ -30,7 +30,7 @@ geometry.py → data.py → models.py + training.py → evaluation.py
 
 __main__.py recebe o comando no terminal e chama a etapa escolhida.
 tests/ verifica propriedades matemáticas e comportamento do programa.
-docs/ e notebooks/ explicam o que foi feito e como interpretar.
+docs/ reúne o planejamento, a apresentação, o relatório, o notebook e a documentação de apoio.
 ```
 
 Uma **função** é uma operação que recebe entradas e devolve resultados. Um **módulo** é um arquivo `.py` que reúne operações relacionadas. Um **array** é uma tabela de números; `shape (N,35)` significa N exemplos, cada um com 35 coordenadas. Em PyTorch, um **tensor** também é uma tabela numérica, acompanhada das operações necessárias para calcular derivadas e treinar redes. Um **checkpoint** guarda um modelo já ajustado e informações necessárias para reutilizá-lo.
@@ -39,7 +39,7 @@ Uma **função** é uma operação que recebe entradas e devolve resultados. Um 
 
 **Objetivo:** descrever o problema em dois minutos.
 
-Leia, nesta ordem, o [README principal](../README.md), a introdução do [notebook](../notebooks/relatorio-projeto-g2.ipynb) e o [planejamento comentado](analise-planejamento.md). Consulte o [PDF original](../material-consulta/Planajamento%20de%20projeto.pdf) para separar o que ele pede das escolhas necessárias para implementar o experimento. O nome real do PDF tem a grafia `Planajamento`.
+Leia, nesta ordem, o [README principal](../README.md), a introdução do [notebook](relatorio-projeto-g2.ipynb) e o [planejamento comentado](analise-planejamento.md). Consulte o [PDF original](Planajamento%20de%20projeto.pdf) para separar o que ele pede das escolhas necessárias para implementar o experimento. O nome real do PDF tem a grafia `Planajamento`.
 
 Identifique a entrada φ, a saída g, a referência exata e os três métodos comparados. Aprendizagem supervisionada significa ajustar uma função a pares de entrada e resposta conhecida; não há um agente descobrindo recompensas ou conversando com um modelo de linguagem durante o treino.
 
@@ -63,7 +63,7 @@ Pense na ridge como uma aplicação afim regularizada das coordenadas da entrada
 
 **Objetivo:** entender de onde vem cada par (φ,g).
 
-Leia as seções matemáticas do [notebook](../notebooks/relatorio-projeto-g2.ipynb), depois [geometry.py](../g2metric/geometry.py). Observe, nesta ordem, `phi0`, `pullback`, `sample_gl7` e `metric_exact`. Na primeira passagem, basta ler os comentários e reconhecer os argumentos e o resultado de cada função.
+Leia as seções matemáticas do [notebook](relatorio-projeto-g2.ipynb), depois [geometry.py](../g2metric/geometry.py). Observe, nesta ordem, `phi0`, `pullback`, `sample_gl7` e `metric_exact`. Na primeira passagem, basta ler os comentários e reconhecer os argumentos e o resultado de cada função.
 
 Parte-se de φ₀, cuja métrica é a identidade. Sorteia-se A = Q₁ diag(exp(s)) Q₂, com Q₁ e Q₂ rotações e s controlando os logaritmos dos valores singulares. O gerador produz φ = A*φ₀ e g = AᵀA. Assim, não precisa adivinhar quais vetores de 35 números representam formas positivas. A rede nunca recebe A ou s como atributos de entrada.
 
@@ -163,13 +163,13 @@ Os testes procuram erros de implementação: sinais e convenções, divisão dos
 
 | Pasta | Papel | Prioridade de leitura |
 | --- | --- | --- |
-| [material-consulta](../material-consulta) | PDF original do planejamento. Não contém dados usados como entradas da rede. | Consultar junto ao planejamento comentado. |
-| [notebooks](../notebooks) | Exposição integrada e didática do projeto. | Começar por aqui. |
+| [docs/apresentacao](apresentacao) | Slides em PDF, fonte LaTeX e figuras da apresentação. | Síntese do projeto. |
+| [docs/relatorio](relatorio) | Relatório em inglês, fonte LaTeX e figuras. | Texto de submissão. |
 | [scripts](../scripts) | Ferramentas auxiliares de documentação, como a montagem do notebook a partir dos resultados registrados. | Depois de compreender o relato; não participa do treinamento. |
 | [configs](../configs) | Valores que controlam geração, treinamento e avaliação. | Antes de executar experimentos. |
 | [g2metric](../g2metric) | Código do projeto; é o pacote Python usado por `python -m g2metric`. | Ler por função científica, na ordem das sessões. |
 | [tests](../tests) | Verificações automatizadas com casos conhecidos e pequenos. | Após entender o fluxo. |
-| [docs](../docs) | Decisões, interpretação dos resultados, registro de assistência e roteiro. | Acompanha todo o roteiro. |
+| [docs](.) | Planejamento e notebook na raiz; decisões, resultados, registro de assistência e roteiro. | Começar pelo notebook e acompanhar o roteiro. |
 | [outputs/full](../outputs/full) | Execução científica completa, com 27 ajustes. | Fonte dos números apresentados. |
 | [outputs/smoke](../outputs/smoke) | Execução reduzida para verificar funcionamento; 600 pares ID, 90 OOD, uma semente e até 4 épocas. | Para conhecer arquivos sem confundir com resultados completos. |
 | [outputs/example](../outputs/example) | `phi0.npy` e `metric.npy`, exemplos binários de entrada e saída de inferência. A resposta exata de φ₀ é I; uma previsão aprendida pode diferir. | Demonstração opcional. |
@@ -208,7 +208,7 @@ Arquivos como `.pyc`, pastas de cache e saídas repetidas seguem padrões; não 
 | [.gitignore](../.gitignore) | Diz ao Git quais arquivos novos ignorar, como ambiente, caches, dados gerados, pesos e previsões. Ignorar não apaga arquivos locais; arquivos já rastreados têm tratamento próprio no Git. |
 | [configs/full.json](../configs/full.json) | Protocolo completo com 30.000 exemplos ID e 27 ajustes. |
 | [configs/smoke.json](../configs/smoke.json) | Protocolo curto para verificar o fluxo. Não substitui a execução completa. |
-| [notebooks/relatorio-projeto-g2.ipynb](../notebooks/relatorio-projeto-g2.ipynb) | Relato auto-contido com conceitos, parâmetros, gráficos, resultados e pequenos exemplos. |
+| [docs/relatorio-projeto-g2.ipynb](relatorio-projeto-g2.ipynb) | Relato auto-contido com conceitos, parâmetros, gráficos, resultados e pequenos exemplos. |
 | [scripts/build_notebook.py](../scripts/build_notebook.py) | Lê resultados, configuração, metadados e figuras de `outputs/full/`; incorpora-os ao notebook, valida seu formato e executa os exemplos em uma pasta temporária isolada. Não treina nem importa `g2metric` nas células. |
 | [docs/analise-planejamento.md](analise-planejamento.md) | Traduz cada requisito do PDF em decisões concretas e distingue escolhas adicionais. |
 | [docs/resultados.md](resultados.md) | Interpretação científica da execução completa e suas limitações. |
@@ -289,7 +289,7 @@ Para abrir o notebook no VS Code, use um visualizador compatível com Jupyter. A
 .\.venv\Scripts\python.exe -m pip install -e '.[notebook]'
 ```
 
-Para estudar ou reexecutar as células, use o notebook pronto. **Regenerar o documento** é outra operação: o comando abaixo precisa dos resultados e figuras de `outputs/full/` e reconstrói/substitui `notebooks/relatorio-projeto-g2.ipynb`. Ele serve para atualizar o relato a partir das evidências registradas, não para produzir novos resultados científicos. Caso tenha feito anotações pessoais no notebook, salve antes uma cópia com outro nome.
+Para estudar ou reexecutar as células, use o notebook pronto. **Regenerar o documento** é outra operação: o comando abaixo precisa dos resultados e figuras de `outputs/full/` e reconstrói/substitui `docs/relatorio-projeto-g2.ipynb`. Ele serve para atualizar o relato a partir das evidências registradas, não para produzir novos resultados científicos. Caso tenha feito anotações pessoais no notebook, salve antes uma cópia com outro nome.
 
 ```powershell
 # Opcional: reconstruir o notebook a partir dos resultados existentes.

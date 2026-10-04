@@ -1,6 +1,6 @@
 # Planejamento e decisões de implementação
 
-Fonte primária: [Planajamento de projeto.pdf](../material-consulta/Planajamento%20de%20projeto.pdf), 3 páginas. O nome no disco contém `Planajamento`; o arquivo foi preservado. A leitura e a conferência visual das três páginas antecederam a implementação.
+Fonte primária: [Planajamento de projeto.pdf](Planajamento%20de%20projeto.pdf), 3 páginas. O nome no disco contém `Planajamento`; o arquivo foi preservado. A leitura e a conferência visual das três páginas antecederam a implementação.
 
 ## Problema matemático
 

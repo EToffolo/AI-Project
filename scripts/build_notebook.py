@@ -32,7 +32,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 RUN = ROOT / "outputs" / "full"
-TARGET = ROOT / "notebooks" / "relatorio-projeto-g2.ipynb"
+TARGET = ROOT / "docs" / "relatorio-projeto-g2.ipynb"
 
 
 def load(name):
@@ -650,14 +650,14 @@ def main():
 
     | Pasta/arquivo | Papel |
     | --- | --- |
-    | `material-consulta/` | PDF original do planejamento |
+    | `docs/Planajamento de projeto.pdf` | PDF original do planejamento |
     | `configs/` | Parâmetros `smoke` e `full`; não são pesos aprendidos |
     | `tests/` | Verificações matemáticas e de software |
     | `docs/` | Decisões, resultados, declaração de IA e roteiro |
     | `outputs/full/` | Experimento científico completo |
     | `outputs/smoke/` | Verificação rápida do funcionamento |
     | `outputs/example/` | Forma padrão e exemplo de inferência |
-    | `notebooks/` | Este documento, com resultados e imagens incorporados |
+    | `docs/relatorio-projeto-g2.ipynb` | Este documento, com resultados e imagens incorporados |
     | `scripts/build_notebook.py` | Monta este notebook a partir dos resultados registrados |
     | `README.md` | Porta de entrada e comandos de uso |
     | `pyproject.toml`, `requirements*.txt` | Pacote e dependências |
@@ -810,7 +810,7 @@ def main():
     md("""
     ### Fontes usadas
 
-    - **Planejamento do projeto**, Eduardo Toffolo, *Learning the Metric Induced by a G₂-Structure: Generalisation and Equivariance*, 3 páginas. No repositório: `material-consulta/Planajamento de projeto.pdf` (grafia original preservada).
+    - **Planejamento do projeto**, Eduardo Toffolo, *Learning the Metric Induced by a G₂-Structure: Generalisation and Equivariance*, 3 páginas. No repositório: `docs/Planajamento de projeto.pdf` (grafia original preservada).
     - S. Karigiannis, [Introduction to G₂ geometry](https://arxiv.org/abs/1909.09717).
     - S. Grigorian, [Deformations of G₂-structures with torsion](https://arxiv.org/abs/1108.2465), seção 2, para as convenções e a fórmula da métrica.
     - S. Chen, E. Dobriban e J. H. Lee, [A Group-Theoretic Framework for Data Augmentation](https://jmlr.org/papers/v21/20-163.html).

@@ -2,7 +2,7 @@
 
 Projeto da disciplina **MM845 — uso de IA na pesquisa matemática**. Compara regressão ridge, uma MLP em PyTorch e a mesma MLP com augmentação por rotações para aproximar a aplicação `φ ↦ g_φ` em um espaço vetorial orientado de dimensão 7.
 
-O planejamento é o arquivo [Planajamento de projeto.pdf](material-consulta/Planajamento%20de%20projeto.pdf). A rede recebe **35 coeficientes de uma 3-forma positiva** e retorna uma matriz simétrica 7×7 positiva definida. Trata-se de um benchmark algébrico com fórmula exata conhecida.
+O planejamento é o arquivo [Planajamento de projeto.pdf](docs/Planajamento%20de%20projeto.pdf). A rede recebe **35 coeficientes de uma 3-forma positiva** e retorna uma matriz simétrica 7×7 positiva definida. Trata-se de um benchmark algébrico com fórmula exata conhecida.
 
 ## Instalação
 
@@ -43,7 +43,9 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-O ambiente `.venv` preparado nesta sessão já contém as dependências. Não é necessário ativá-lo. Em Linux/macOS, substitua `.\.venv\Scripts\python.exe` por `.venv/bin/python`.
+Os comandos acima criam um ambiente local novo. Não é necessário ativá-lo quando
+se usa o caminho completo do executável. Em Linux/macOS, substitua
+`.\.venv\Scripts\python.exe` por `.venv/bin/python`.
 
 Para instalar especificamente a distribuição PyTorch para CPU:
 
@@ -133,7 +135,8 @@ Precisão, equivariância e escala são medidas separadamente: uma saída quase 
 
 ## Documentação e estrutura
 
-- [Notebook explicativo do projeto](notebooks/relatorio-projeto-g2.ipynb): texto, fórmulas, parâmetros, resultados e cinco figuras incorporadas; pode ser lido sem executar as células ou acessar outros arquivos.
+- [Notebook explicativo do projeto](docs/relatorio-projeto-g2.ipynb): texto, fórmulas, parâmetros, resultados e cinco figuras incorporadas; pode ser lido sem executar as células ou acessar outros arquivos.
+- [Apresentação](docs/apresentacao/apresentacao-projeto-g2.pdf) e [relatório em inglês](docs/relatorio/relatorio-projeto-g2.pdf): PDFs, fontes LaTeX e figuras nas respectivas pastas.
 - [Roteiro de estudo em oito sessões](docs/roteiro-de-estudo.md): ordem de leitura, função de cada pasta/arquivo, atividades e perguntas com respostas.
 - [Planejamento, decisões e rastreabilidade dos requisitos](docs/analise-planejamento.md)
 - [Registro de assistência de IA](docs/uso-ia.md)
@@ -146,7 +149,7 @@ O projeto não impõe condições de torção nula nem resolve equações difere
 
 ## Ler e executar o notebook
 
-Comece por `notebooks/relatorio-projeto-g2.ipynb` para a visão científica e use o roteiro para explorar o código aos poucos. As saídas dos oito exemplos já estão salvas, e as imagens estão anexadas às células. Os exemplos reexecutáveis são pequenos e não iniciam treinamento; os resultados medidos são incorporados ao documento.
+Comece por `docs/relatorio-projeto-g2.ipynb` para a visão científica e use o roteiro para explorar o código aos poucos. As saídas dos oito exemplos já estão salvas, e as imagens estão anexadas às células. Os exemplos reexecutáveis são pequenos e não iniciam treinamento; os resultados medidos são incorporados ao documento.
 
 No VS Code, abra o arquivo com suporte a notebooks Jupyter e, se quiser executar, selecione o Python de `.venv` como kernel. Num novo ambiente, instale o grupo opcional:
 
@@ -155,3 +158,63 @@ No VS Code, abra o arquivo com suporte a notebooks Jupyter e, se quiser executar
 ```
 
 `scripts/build_notebook.py` permite reconstruir e validar o documento a partir da execução registrada em `outputs/full/`. Esse script requer o repositório e os resultados; o notebook produzido pode ser lido e seus exemplos podem ser executados separadamente.
+
+## Reproducing the report (English quick start)
+
+The repository is <https://github.com/EToffolo/AI-Project>. Start with Python 3.10+
+and Git, and run the following from a terminal:
+
+```text
+git clone https://github.com/EToffolo/AI-Project.git
+cd AI-Project
+python -m venv .venv
+```
+
+On Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -m g2metric run --config configs/full.json --output outputs/reproduction
+```
+
+On Linux/macOS:
+
+```bash
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pytest -q
+.venv/bin/python -m g2metric run --config configs/full.json --output outputs/reproduction
+```
+
+Run these commands from the repository root. The output directory must be new or
+empty. The full configuration regenerates the synthetic data and all 27 fitted
+models, then writes the central accuracy, equivariance and scaling results to
+`metrics.csv`, `report.md` and `figures/` in that directory. The smoke configuration
+checks the pipeline with a small budget; it does not reproduce the report's results.
+Seeds and the CPU configuration are fixed; numerical results may differ slightly
+between software versions and platforms. `requirements-lock.txt` records the
+versions of the original environment. Raw outputs and virtual environments are not
+included in a clone.
+
+The English submission report is
+[relatorio-projeto-g2.pdf](docs/relatorio/relatorio-projeto-g2.pdf), with five
+pages of main text and references on page six. Its
+[LaTeX source](docs/relatorio/relatorio-projeto-g2.tex) and vector figures in
+`docs/relatorio/relatorio-assets/` are included, so compilation does not require
+training. With a LaTeX distribution installed, run this command **twice** from the
+repository root:
+
+```text
+pdflatex -interaction=nonstopmode -halt-on-error -output-directory=docs/relatorio docs/relatorio/relatorio-projeto-g2.tex
+```
+
+To regenerate the report's figures and numerical tables from a new full run, use
+the appropriate virtual-environment Python executable with:
+
+```text
+python scripts/build_report_assets.py --results outputs/reproduction --output docs/relatorio/relatorio-assets
+```
+
+This rebuilds the three figures and the tables. Narrative statements in the LaTeX
+source describe the original run and should be reviewed if results or configuration
+change.
